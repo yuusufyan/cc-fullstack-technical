@@ -16,7 +16,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 // Admin Post
-
 Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/posts', [PostController::class, 'index']);       // list post
     Route::get('/posts/{id}', [PostController::class, 'show']);   // detail post
@@ -24,6 +23,10 @@ Route::middleware(['auth:sanctum', 'role:admin'])->prefix('admin')->group(functi
     Route::put('/posts/{id}', [PostController::class, 'update']); // update
     Route::delete('/posts/{id}', [PostController::class, 'destroy']); // delete
 });
+
+// Guest Post
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{id}', [PostController::class, 'show']);
 
 // API Check Health
 Route::get('/test-api', function () {
